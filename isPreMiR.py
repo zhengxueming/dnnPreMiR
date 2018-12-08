@@ -1,6 +1,6 @@
 """ miRNA prediction of a sequence input or a file input containing many sequences
 """
-#!/usr/bin/python
+#!/usr/bin/env python3
 # -*- coding: UTF-8 -*-
 
 import sys, getopt
@@ -25,7 +25,7 @@ def usage():
     print("""
           USAGE:
           python isPreMiR.py -s RNAsequence 
-          for example: python isPreMiR.py -s 
+          for example: python isPreMiR.py -s CUCCGGUGCCUACUGAGCUGAUAUCAGUUCUCAUUUUACACACUGGCUCAGUUCAGCAGGAACAGGA 
 
           python isPreMiR.py -i inputFilePath [-o outputFilePath]
 
@@ -54,6 +54,9 @@ def parse_opt(argv):
     try:
         opts, args = getopt.getopt(argv,"hs:i:o:",["sequence=","infile=","outfile="])
     except getopt.GetoptError:
+        usage()
+        sys.exit(2)
+    if len(opts) < 1:
         usage()
         sys.exit(2)
     for opt, arg in opts:
@@ -109,7 +112,7 @@ def predict_results(seq_struct_vector):
 def main(argv):
     #parse_opt(argv)
     seq,infile,outfile = parse_opt(argv)
-    if seq:
+    if len(seq)>0:
         # write to the temp file
         with open("./temp/temp_sequence.fa","w") as fd:
             fd.write(">\n")
@@ -138,6 +141,10 @@ def main(argv):
         exit(0)
 
     elif infile:
+        # check file exist
+        if not os.path.exists(infile):
+            print("file doesn't exist!")
+            sys.exit(1)
         print (infile)
         # calculate the second structure
         os.system("./bin/RNAfold -i " + infile + " --noPS" \
@@ -206,7 +213,7 @@ def main(argv):
 
         print("prediction finished!")
         exit(0)
-
+       
 
 if __name__ == "__main__":
    main(sys.argv[1:])

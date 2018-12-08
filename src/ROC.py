@@ -3,7 +3,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import roc_curve, auc  ###计算roc和auc
-from sklearn import cross_validation
+#from sklearn import cross_validation
 import sys
 sys.path.append("./data")
 from data import dataSetPartition
@@ -41,11 +41,11 @@ def ROC_curve():
     cnnrnn_roc_auc = auc(cnnrnn_fpr,cnnrnn_tpr)
     # plotting
     plt.figure(figsize=(10,10))
-    plt.plot(cnn_fpr, cnn_tpr, color='black',\
+    plt.plot(cnn_fpr, cnn_tpr, '-',\
          linewidth=2, label='CNN model-AUC:%0.4f)' %cnn_roc_auc) 
-    plt.plot(rnn_fpr, rnn_tpr, color='red',\
+    plt.plot(rnn_fpr, rnn_tpr, '--',\
          linewidth=2, label='RNN model-AUC:%0.4f)' %rnn_roc_auc) 
-    plt.plot(cnnrnn_fpr, cnnrnn_tpr, color='blue',\
+    plt.plot(cnnrnn_fpr, cnnrnn_tpr, '-.',\
          linewidth=2, label='CNN_RNN model-AUC:%0.4f)' %cnnrnn_roc_auc) 
    # plt.plot([0, 1], [0, 1], color='navy', linewidth=2, linestyle='--')
     plt.xlim([0.0, 1.0])

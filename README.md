@@ -6,7 +6,7 @@ Data are from the human pre-miRNAs and hairpin structure sequences from human co
 
 USAGE:
           python isPreMiR.py -s RNAsequence 
-          for example: python isPreMiR.py -s 
+          for example: python isPreMiR.py -s CUCCGGUGCCUACUGAGCUGAUAUCAGUUCUCAUUUUACACACUGGCUCAGUUCAGCAGGAACAGGA
 
           python isPreMiR.py -i inputFilePath [-o outputFilePath]
 
